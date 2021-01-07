@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,5 +33,15 @@ public class EventController {
 		Iterable<Event> events = ev.findAll();
 		mv.addObject("events", events);
 		return mv;
+	}
+	
+	@RequestMapping("/{id}")
+	public ModelAndView eventDetails(@PathVariable("id") long id) {
+		Event event = ev.findById(id);
+		ModelAndView mv = new ModelAndView("event/eventDetails");
+		mv.addObject("event", event);
+		System.out.println("Evento: " + event);
+		return mv;
+		
 	}
 }

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<title>EventApp</title>
+	<title>EventsApp</title>
 	
 	<!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -29,7 +29,7 @@
 		
 		<tbody>
 			<tr th:each="event : ${events}">
-				<td><span th:text = ${event.name}></span></td>
+				<td><a th:href="${(#mvc.url('EC#eventDetails').arg(0, event.id)).build()}"><span th:text = ${event.name}></span></a></td>
 				<td><span th:text = ${event.local}></span></td>
 				<td><span th:text = ${event.date}></span></td>
 				<td><span th:text = ${event.start}></span></td>

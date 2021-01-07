@@ -16,29 +16,17 @@
 
 <body>
 	
-	<h1>Cadastro de Eventos</h1>
+	<h1>Detalhes do Evento</h1>
 	<h3><a href="/events" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h3>
-	<form class="container" method="post">
-		
-		Nome: <input type="text" value="" name="name"/>
-		
+	
+	<div th:each="event : ${event}" class="container">
 		<div class="row">
-			<div class="input-field col s6">
-				Local: <input type="text" value="" name="local"/>
-			</div>
-			
-			<div class="input-field col s3">
-				Data: <input type="date" value="" name="date"/>
-			</div>
-			
-			<div class="input-field col s3">
-				Horario: <input type="text" value="" name="start"/>
-			</div>
-			
+			<p>Nome: <span th:text="${event.name}"></span></p>
+			<p>Local: <span th:text="${event.local}"></span></p>
+			<p>Data: <span th:text="${event.date}"></span></p>
+			<p>Horario: <span th:text="${event.start}"></span></p>
 		</div>
-		
-		<button class="waves-effect waves-light btn" type="submit">Cadastrar</button>
-	</form>
+	</div>
 	
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>

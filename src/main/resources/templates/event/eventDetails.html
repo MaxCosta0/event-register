@@ -31,8 +31,24 @@
 			Nome: <input type="text" value="" name="participantName"/>
 			CPF: <input type="text" value="" name="cpf"/>
 			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
-			
 		</form>
+		
+		<div class="container">
+			<h5>Lista de Participantes:</h5>		
+		</div>
+		
+		<div class="container" th:each="participant : ${participants}">
+			<div class="row">
+				<div class="input-field col s6">
+					<p><span th:text="${participant.participantName}"></span>
+				</div>
+				
+				<div class="input-field col s3">
+					<p><span th:text="${participant.cpf}"></span>
+				</div>
+			</div>
+			
+		</div>
 		
 	</div>
 	

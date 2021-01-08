@@ -36,7 +36,7 @@ public class EventController {
 	}
 	
 	@RequestMapping("/{id}")
-	public ModelAndView eventDetails(@PathVariable("id") long id) {
+	public ModelAndView eventDetails(@PathVariable("id") Long id) {
 		Event event = ev.findById(id);
 		ModelAndView mv = new ModelAndView("event/eventDetails");
 		mv.addObject("event", event);

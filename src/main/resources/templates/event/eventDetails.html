@@ -26,6 +26,14 @@
 			<p>Data: <span th:text="${event.date}"></span></p>
 			<p>Horario: <span th:text="${event.start}"></span></p>
 		</div>
+		
+		<form method="post">
+			Nome: <input type="text" value="" name="participantName"/>
+			RG: <input type="text" value="" name="rg"/>
+			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+			
+		</form>
+		
 	</div>
 	
 	<!--JavaScript at end of body for optimized loading-->

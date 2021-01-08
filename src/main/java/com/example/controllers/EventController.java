@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.models.Event;
+import com.example.models.Participant;
 import com.example.repository.EventRepository;
+import com.example.repository.ParticipantRepository;
 
 @Controller
 public class EventController {
 	
 	@Autowired
-	private EventRepository ev;
+	private EventRepository er;
+	
+	@Autowired
+	private ParticipantRepository pr;
 	
 	@RequestMapping(value="/eventRegister", method=RequestMethod.GET)
 	public String form() {
@@ -23,25 +28,33 @@ public class EventController {
 	
 	@RequestMapping(value="/eventRegister", method=RequestMethod.POST)
 	public String form(Event event) {
-		ev.save(event);
+		er.save(event);
 		return "redirect:/eventRegister";
 	}
 	
 	@RequestMapping("/events")
 	public ModelAndView eventList() {
 		ModelAndView mv = new ModelAndView("index");
-		Iterable<Event> events = ev.findAll();
+		Iterable<Event> events = er.findAll();
 		mv.addObject("events", events);
 		return mv;
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView eventDetails(@PathVariable("id") Long id) {
-		Event event = ev.findById(id);
+		Event event = er.findById(id);
 		ModelAndView mv = new ModelAndView("event/eventDetails");
 		mv.addObject("event", event);
-		System.out.println("Evento: " + event);
+		//System.out.println("Evento: " + event);
 		return mv;
 		
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	public String eventDetailsPost(@PathVariable("id") Long id, Participant participant) {
+		Event event = er.findById(id);
+		participant.setEvent(event);
+		pr.save(participant);
+		return "redirect:/{id}";
 	}
 }

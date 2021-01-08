@@ -3,15 +3,14 @@ package com.example.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "event")
 public class Event implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -19,9 +18,17 @@ public class Event implements Serializable{
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private String local;
+	
+	@Column
 	private String date;
+	
+	@Column
 	private String start;
 	
 	@OneToMany

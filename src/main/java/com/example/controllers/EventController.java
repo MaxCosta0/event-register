@@ -31,8 +31,14 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/eventRegister", method=RequestMethod.POST)
-	public String form(Event event) {
+	public String form(@Valid Event event, BindingResult result, RedirectAttributes attributes) {
+		
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("message", "Falha ao cadastrar o participante. Certifique de que todos os campos estao preenchidos!");
+			return "redirect:/eventRegister";
+		}		
 		er.save(event);
+		attributes.addFlashAttribute("message", "Evento cadastrado com sucesso!");
 		return "redirect:/eventRegister";
 	}
 	
@@ -60,7 +66,7 @@ public class EventController {
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public String eventDetailsPost(@PathVariable("id") Long id, @Valid Participant participant, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
-			attributes.addFlashAttribute("message", "Falha ao cadastrar o participante. Certifique de que os campos estao preenchidos corretamente!");
+			attributes.addFlashAttribute("message", "Falha ao cadastrar o participante. Certifique de que todos os campos estao preenchidos");
 			return "redirect:/{id}";
 		}
 		

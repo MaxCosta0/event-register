@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Event implements Serializable{
@@ -20,15 +21,19 @@ public class Event implements Serializable{
 	private Long id;
 	
 	@Column
+	@NotEmpty
 	private String name;
 	
 	@Column
+	@NotEmpty
 	private String local;
 	
 	@Column
+	@NotEmpty
 	private String date;
 	
 	@Column
+	@NotEmpty
 	private String start;
 	
 	@OneToMany

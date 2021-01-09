@@ -36,11 +36,11 @@
 			<p>Data: <span th:text="${event.date}"></span></p>
 			<p>Horario: <span th:text="${event.start}"></span></p>
 		</div>
-		
-		<div class="container">
+	</div>
+	
+	<div class="container validationMessage">
 			<th:block th:include="validationMessage"></th:block>
 		</div>
-	</div>
 	
 	<div class="container participantForm">
 		<form method="post">

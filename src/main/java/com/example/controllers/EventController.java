@@ -60,7 +60,13 @@ public class EventController {
 		mv.addObject("participants", participants);
 		
 		return mv;
-		
+	}
+	
+	@RequestMapping("/eventDelete")
+	public String eventDelete(Long id) {
+		Event event = er.findById(id);
+		er.delete(event);
+		return "redirect:/events";
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
@@ -75,5 +81,16 @@ public class EventController {
 		pr.save(participant);
 		attributes.addFlashAttribute("message", "Participante cadastrado com sucesso!");
 		return "redirect:/{id}";
+	}
+	
+	@RequestMapping("/participantDelete")
+	public String participantDelete(Long cpf) {
+		Participant participant = pr.findByCpf(cpf);
+		pr.delete(participant);
+		
+		Event event = participant.getEvent();
+		Long longId = event.getId();
+		String id = ""+ longId;		
+		return "redirect:/"+id;
 	}
 }

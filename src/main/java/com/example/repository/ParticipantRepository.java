@@ -7,4 +7,5 @@ import com.example.models.Participant;
 
 public interface ParticipantRepository extends CrudRepository<Participant, String>{
 	Iterable<Participant> findByEvent(Event event);
+	Participant findByCpf(Long cpf);
 }

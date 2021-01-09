@@ -1,11 +1,15 @@
 package com.example.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.models.Event;
 import com.example.models.Participant;
@@ -54,10 +58,16 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public String eventDetailsPost(@PathVariable("id") Long id, Participant participant) {
+	public String eventDetailsPost(@PathVariable("id") Long id, @Valid Participant participant, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("message", "Falha ao cadastrar o participante. Certifique de que os campos estao preenchidos corretamente!");
+			return "redirect:/{id}";
+		}
+		
 		Event event = er.findById(id);
 		participant.setEvent(event);
 		pr.save(participant);
+		attributes.addFlashAttribute("message", "Participante cadastrado com sucesso!");
 		return "redirect:/{id}";
 	}
 }

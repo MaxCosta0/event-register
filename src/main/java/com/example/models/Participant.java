@@ -4,14 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Participant{
 	
 	@Id
+	@NotNull
 	private Long cpf;
 	
 	@Column
+	@NotEmpty
 	private String participantName;
 	
 	@ManyToOne

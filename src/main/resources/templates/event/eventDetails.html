@@ -27,6 +27,10 @@
 			<p>Horario: <span th:text="${event.start}"></span></p>
 		</div>
 		
+		<div class="container">
+			<th:block th:include="validationMessage"></th:block>
+		</div>
+		
 		<form method="post">
 			Nome: <input type="text" value="" name="participantName"/>
 			CPF: <input type="text" value="" name="cpf"/>
